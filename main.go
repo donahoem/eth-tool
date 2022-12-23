@@ -39,13 +39,13 @@ func checkArgs() {
 		}
 	case "--check-balance":
 		if len(os.Args) != 3 || len(os.Args[2]) != 42 {
-			fmt.Println("option '--check-balance' requires a 42 character ethereum address starting with '0x' as an argument")
+			fmt.Println("option '--check-balance' requires an address (42 characters starting with '0x') as an argument")
 			printUsage()
 			os.Exit(1)
 		}
 	case "--send-wei":
-		if len(os.Args) != 5 || len(os.Args[3]) != 64 || len(os.Args[5]) != 42 {
-			fmt.Println("option '--send-wei' requires a private key (64 characters), amount (in wei), and address (42 characters) as arguments")
+		if len(os.Args) != 5 || len(os.Args[4]) != 42 {
+			fmt.Println("option '--send-wei' requires a sender private key, amount (in wei), and recipient address (42 characters starting with '0x') as arguments")
 			printUsage()
 			os.Exit(1)
 		}
