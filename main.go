@@ -10,14 +10,13 @@ func main() {
 
 	switch os.Args[1] {
 	case "--create-wallet":
-		priv, pub, address := createWallet()
-		fmt.Println("priv: " + priv)
-		fmt.Println("pub: " + pub)
+		priv, address := createWallet()
+		fmt.Println("private key: " + priv)
 		fmt.Println("address: " + address)
 	case "--check-balance":
 		balance := getBalanceFromStringAddress(os.Args[2])
 		fmt.Println("wei balance: " + balance)
-	case "--send-eth":
+	case "--send-wei":
 		txid := sendEth(os.Args[2], os.Args[3], os.Args[4])
 		fmt.Println("transaction id: " + txid)
 	default:
@@ -39,22 +38,24 @@ func checkArgs() {
 			os.Exit(1)
 		}
 	case "--check-balance":
-		if len(os.Args) != 3 {
-			fmt.Println("option '--check-balance' requires an ethereum address as an argument")
+		if len(os.Args) != 3 || len(os.Args[2]) != 42 {
+			fmt.Println("option '--check-balance' requires a 42 character ethereum address starting with '0x' as an argument")
 			printUsage()
 			os.Exit(1)
 		}
-	case "--send-eth":
-		if len(os.Args) != 5 {
-			fmt.Println("option '--send-eth' requires a private key, amount, and to address as arguments")
+	case "--send-wei":
+		if len(os.Args) != 5 || len(os.Args[3]) != 64 || len(os.Args[5]) != 42 {
+			fmt.Println("option '--send-wei' requires a private key (64 characters), amount (in wei), and address (42 characters) as arguments")
 			printUsage()
 			os.Exit(1)
 		}
+		// exit early
+		os.Exit(0)
 	default:
 		printUsage()
 	}
 }
 
 func printUsage() {
-	fmt.Println("usage: eth-tool [--create-wallet] [--check-balance <address>] [--send-ether <privkey> <amount> <toAddress>]")
+	fmt.Println("usage: eth-tool [--create-wallet] [--check-balance <address>] [--send-wei <privkey> <amount> <toAddress>]")
 }
