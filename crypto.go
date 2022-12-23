@@ -31,12 +31,11 @@ func getBalanceFromStringAddress(address string) string {
 }
 
 // Could possibly create a smart contract that modifies user balance when receiving a deposit.
-func createWallet() (privkey string, pubkey string, address string, err error) {
+func createWallet() (privkey string, pubkey string, address string) {
 	// Generate privkey key.
 	privateKey, err := crypto.GenerateKey()
 	if err != nil {
-		log.Println(err.Error())
-		return "", "", "", err
+		log.Fatal(err.Error())
 	}
 	// Convert the privateKey to bytes.
 	privateKeyBytes := crypto.FromECDSA(privateKey)
@@ -48,7 +47,7 @@ func createWallet() (privkey string, pubkey string, address string, err error) {
 	publicKeyECDSA, ok := publicKey.(*ecdsa.PublicKey)
 	if !ok {
 		err = errors.New("cannot assert type: publicKey is not of type *ecdsa.PublicKey")
-		return "", "", "", err
+		log.Fatal(err.Error())
 	}
 	publicKeyBytes := crypto.FromECDSAPub(publicKeyECDSA)
 	// Strip off '0x04'
@@ -60,11 +59,10 @@ func createWallet() (privkey string, pubkey string, address string, err error) {
 	balance := getBalance(address)
 	if balance.Cmp(big.NewInt(0)) != 0 {
 		err := errors.New(fmt.Sprintf("Address %s has non-zero balance", address))
-		log.Fatal(err)
-		return "", "", "", err
+		log.Fatal(err.Error())
 	}
 
-	return privkey, pubkey, address, err
+	return privkey, pubkey, address
 }
 
 func getBalance(pubkey string) *big.Int {

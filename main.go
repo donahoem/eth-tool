@@ -10,11 +10,7 @@ func main() {
 
 	switch os.Args[1] {
 	case "--create-wallet":
-		priv, pub, address, err := createWallet()
-		if err != nil {
-			fmt.Printf(err.Error())
-			return
-		}
+		priv, pub, address := createWallet()
 		fmt.Println("priv: " + priv)
 		fmt.Println("pub: " + pub)
 		fmt.Println("address: " + address)
