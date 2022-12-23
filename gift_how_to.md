@@ -27,12 +27,12 @@
 - To tell the tool to **create a new wallet**, run the following command:
 	- ./eth-tool --create-wallet
 	- You should now see the address and private key on the screen
-- To **check the balance** of this address (or any address), run the following command, replacing \<address\> with the address you're interested in:
-	- ./eth-tool --check-balance \<address\>
+- To **check the balance** of this address (or any address), run the following command, replacing <address\> with the address you're interested in:
+	- ./eth-tool --check-balance <address\>
 	- You should see the amount of **wei** in the wallet on the screen
 	- *NOTE:* 1 _ETH_ = 1000000000000000000 _Wei_
-- To **send ethereum** from one address to antoehr, run the following command:
-	- ./eth-tool --send-wei \<sender private key\> <amount in wei\> \<recipient address\> 
-	- Replace \<sender private key\> with the private key of the address you wish to send from
-	- Replace \<amount in wei\> with the amount of wei you wish to send
-	- Replace \<recipient address\> with the address that you wish to send to
+- To **send ethereum** from one address to another, run the following command:
+	- ./eth-tool --send-wei <senderPrivateKey\> <amountInWei\> <recipientAddress\> 
+	- Replace <senderPrivateKey\> with the private key of the address you wish to send from
+	- Replace <amountInWei\> with the amount of wei you wish to send
+	- Replace <recipientAddress\> with the address that you wish to send to
