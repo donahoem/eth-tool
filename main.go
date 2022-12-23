@@ -49,8 +49,6 @@ func checkArgs() {
 			printUsage()
 			os.Exit(1)
 		}
-		// exit early
-		os.Exit(0)
 	default:
 		printUsage()
 	}
